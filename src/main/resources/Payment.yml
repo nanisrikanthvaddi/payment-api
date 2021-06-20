@@ -1,0 +1,118 @@
+openapi: 3.0.0
+info:
+  description: |
+    This is a Payment API   server.  You can find
+    out more Accenture Swagger
+    [http://swagger.io](http://swagger.io) or on
+    [irc.freenode.net, #swagger](http://swagger.io/irc/).
+  version: "1.0.0"
+  title: Swagger Payment
+  termsOfService: 'http://accenture.com/terms'
+  contact:
+    email: srikanth.vaddi@accenture.com
+  license:
+    name: Apache 2.0
+    url: 'https://www.accenture.com/se-en/privacy-policy-eula-accenture-secure-proposal-viewer-app'
+servers:
+  # Added by API Auto Mocking Plugin
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/a69643/accenture/1.0.0
+  - description: Payment API channel
+    url: https://accenture.com/a69643/accenture/1.0.0
+  - url: 'https://accenture.swagger.io/v2'
+tags:
+  - name: Payment-API
+    description: Payment API channel for Business channels
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
+
+paths:
+  /payment:
+    post:
+      tags:
+        - PaymentRequest
+      summary: Create payment
+      description: The payment instructions with creditors list.
+      operationId: createPayment
+      responses:
+        '204':
+          description : payment process successfully
+        '400':
+          description: Invalid payment Instructions
+        default:
+          description: successful operation
+      requestBody:
+        description: Created payment request
+        required: true
+        content:
+          application/json :
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+
+
+
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'
+components:
+  schemas:
+    PaymentRequest:
+      type: object
+      properties:
+        payment-id:
+          type: integer
+          format: int64
+        client-id:
+          type: string
+        client-name:
+          type: string
+        b2b-id :
+          type: string
+        gst-no :
+          type: string
+        debit-account-number :
+          type: string
+        payment-type :
+          type: string
+        payment-instructions-list:
+          type: array
+          items :
+            type: object
+            $ref : '#/components/schemas/Payment'
+
+    Payment :
+      type: object
+      properties :
+        payment-id :
+          type: string
+        payment-status :
+          type: string
+        payment-amount :
+          type: string
+        Account :
+          items :
+            type: object
+            $ref : '#/components/schemas/Account'
+    Account:
+      type: object
+      properties:
+        account-number:
+          type: string
+        beneficiary-name:
+          type: string
+        account-type:
+          type: string
+        mobile-number:
+          type: string
+        country-code:
+          type: string
+        bank-name :
+          type: string
+        bank-branch :
+          type: string
+        bank-branch-code :
+          type: string
+        swift-code:
+          type: string

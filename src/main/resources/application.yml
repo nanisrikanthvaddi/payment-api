@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url : "jdbc:h2:file:~/pm7;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE;DB_CLOSE_DELAY=-1"
+    driverClassName: "org.h2.Driver"
+    username : sa
+    password :
+    database-platform=org : database-platform=org
+    initialization-mode : embedded
+  jpa:
+    hibernate :
+      naming-strategy : org.hibernate.cfg.DefaultComponentSafeNamingStrategy
+      ddl-auto : none
+    show-sql: true
+  h2:
+    console:
+      enabled : true
+      path: "/h2"
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: default
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+
+payment-topic: pq
